@@ -1,1 +1,152 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+   --background: 0 0% 98%;
+    --foreground: 0 0% 5%;
+
+    --muted: 0 0% 92%;
+    /* --muted: 222.2 20.4% 90.2%; */
+    --muted-foreground: 0, 0%, 78%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --border: 0 0% 75%;
+    --input: 0 0% 92%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --primary: 209 100% 24%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0, 0%, 98%;
+    --secondary-foreground: 0, 0%, 11%;
+
+    --accent: 0 0% 96%;
+    /* --accent: 207, 17%, 88%; */
+    /* --accent: 210 40% 96.1%; */
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 354 67% 94%;
+    --destructive-foreground: 355 67% 61%;
+
+    --ring: 215 20.2% 65.1%;
+
+    --label: 0 0% 46%;
+
+    --radius: 0.5rem;
+
+    /* Primary */
+  --primary-50: #e6ecf2;
+  --primary-100: #b0c3d5;
+  --primary-200: #C3D5F6;
+  --primary-300: #8aa6c1;
+  --primary-400: #547ea5;
+  --primary-500: #003e78;
+  --primary-600: #00386d;
+  --primary-700: #002c55;
+  --primary-800: #002242;
+  --primary-900: #001a32;
+
+  /* Secondary */
+  --secondary-50: #fff5e7;
+  --secondary-100: #ffe1b4;
+  --secondary-200: #ffd28f;
+  --secondary-300: #ffbe5c;
+  --secondary-400: #ffb13d;
+  --secondary-500: #ff9e0c;
+  --secondary-600: #e8900b;
+  --secondary-700: #b57009;
+  --secondary-800: #8c5707;
+  --secondary-900: #6b4205;
+
+  /* Red */
+  --red-50: #fae6e8;
+  --red-100: #f0b2b7;
+  --red-200: #e88c95;
+  --red-300: #de5864;
+  --red-400: #d83746;
+  --red-500: #ce0518;
+  --red-600: #bb0516;
+  --red-700: #920411;
+  --red-800: #71030d;
+  --red-900: #57020a;
+
+  /* Green */
+  --green-50: #eaf6ec;
+  --green-100: #bce4c5;
+  --green-200: #9cd7a9;
+  --green-300: #6fc482;
+  --green-400: #53b96a;
+  --green-500: #28a745;
+  --green-600: #24983f;
+  --green-700: #1c7731;
+  --green-800: #165c26;
+  --green-900: #11461d;
+
+  /* Yellow */
+  --yellow-50: #fff9e6;
+  --yellow-100: #ffecb2;
+  --yellow-200: #ffe28d;
+  --yellow-300: #ffd559;
+  --yellow-400: #ffcd39;
+  --yellow-500: #ffc107;
+  --yellow-600: #e8b006;
+  --yellow-700: #b58905;
+  --yellow-800: #8c6a04;
+  --yellow-900: #6b5103;
+
+  /* Blue */
+  --blue-50: #ebf5fb;
+  --blue-100: #c0dff4;
+  --blue-200: #a2d0ee;
+  --blue-300: #77bae7;
+  --blue-400: #5dade2;
+  --blue-500: #3498db;
+  --blue-600: #2f8ac7;
+  --blue-700: #256c9b;
+  --blue-800: #1d5478;
+  --blue-900: #16405c;
+
+  /* Neutral */
+  --neutral-0: #FFFFFF;
+  --neutral-10: #FaFaFa;
+  --neutral-20: #F5F5F5;
+  --neutral-30: #EBEBEB;
+  --neutral-40: #dedede;
+  --neutral-50: #bFbFbF;
+  --neutral-60: #b0b0b0;
+  --neutral-70: #a3a3a3;
+  --neutral-80: #949494;
+  --neutral-90: #858585;
+  --neutral-100: #757575;
+  --neutral-200: #666666;
+  --neutral-300: #575757;
+  --neutral-400: #4a4a4a;
+  --neutral-500: #3b3b3b;
+  --neutral-600: #2e2e2e;
+  --neutral-700: #1c1c1c;
+  --neutral-800: #0d0d0d;
+  --neutral-900: #000000;
+  }
+}
+
+@layer base {
+  :root {
+    --chart-1: 221.2 83.2% 53.3%;
+    --chart-2: 212 95% 68%;
+    --chart-3: 216 92% 60%;
+    --chart-4: 210 98% 78%;
+    --chart-5: 212 97% 87%;
+  }
+
+  .dark {
+    --chart-1: 221.2 83.2% 53.3%;
+    --chart-2: 212 95% 68%;
+    --chart-3: 216 92% 60%;
+    --chart-4: 210 98% 78%;
+    --chart-5: 212 97% 87%;
+  }
+}
