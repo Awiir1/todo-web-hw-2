@@ -1,53 +1,63 @@
-import { useState } from "react"
-import type { Todo } from "../types/todo"
+import { useState } from "react";
+import type { Todo } from "../types/todo";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  addTodoRequest,
+  fetchTodos,
+  updateTodoRequest,
+  deleteTodoRequest
+} from "../../api/todoApi";
 
 export function useTodos() {
-   const [todos, setTodos] = useState<Todo[]>([])
-   const [editingTodo, setEditingTodo] = useState<Todo | null>(null)
+  const queryClient = useQueryClient();
+  const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
 
-   const addTodo = (title: string, description: string) => {
-      const newTodo: Todo = {
-         id: Date.now(),
-         title: title.trim(),
-         description: description.trim(),
-         done: false,
-      }
-      setTodos([...todos, newTodo])
-   }
+  const {
+    data: todos
+  } = useQuery<Todo[]>({
+    queryKey: ["todos"],
+    queryFn: fetchTodos,
+  });
 
-   const updateTodo = (updatedTodo: Todo) => {
-      setTodos(todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo)))
-      setEditingTodo(null)
-   }
+  const addTodo = useMutation({
+    mutationFn: addTodoRequest,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+  });
 
-   const deleteTodo = (id: number) => {
-      setTodos(todos.filter((todo) => todo.id !== id))
-      if (editingTodo?.id === id) {
-         setEditingTodo(null)
-      }
-   }
+  const updateTodo = useMutation({
+    mutationFn: updateTodoRequest,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+  });
 
-   const toggleTodo = (id: number) => {
-      setTodos(todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo)))
-   }
+  const deleteTodo = useMutation({
+   mutationFn: deleteTodoRequest,
+   onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
+ });
 
-   const startEditing = (todo: Todo) => {
-      setEditingTodo(todo)
-   }
+ const toggleTodo = (id: number) => {
+   const todo = todos?.find((todo) => todo.id === id);
+   if (!todo) return;
+ 
+   updateTodo.mutate({ ...todo, done: !todo.done });
+ };
+ 
 
-   const cancelEditing = () => {
-      setEditingTodo(null)
-   }
+  const startEditing = (todo: Todo) => {
+    setEditingTodo(todo);
+  };
 
-   return {
-      todos,
-      editingTodo,
-      addTodo,
-      updateTodo,
-      deleteTodo,
-      toggleTodo,
-      startEditing,
-      cancelEditing,
-   }
+  const cancelEditing = () => {
+    setEditingTodo(null);
+  };
+
+  return {
+    todos,
+    editingTodo,
+    addTodo,
+    updateTodo,
+    deleteTodo,
+    toggleTodo,
+    startEditing,
+    cancelEditing,
+  };
 }
-

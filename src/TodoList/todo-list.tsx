@@ -3,6 +3,7 @@ import { TodoItem } from "./todo-item"
 import { EmptyState } from "./empty-state"
 import { AnimatePresence, motion } from "framer-motion"
 import { useTodos } from "./hooks/use-todos"
+import { v4 as uuidv4 } from "uuid";
 
 export default function TodoList() {
    const { todos, addTodo, updateTodo, deleteTodo, toggleTodo, editingTodo, startEditing, cancelEditing } = useTodos()
@@ -14,11 +15,11 @@ export default function TodoList() {
                <div className="p-6">
                   <h1 className="text-3xl font-bold text-center mb-6 text-white">Task Manager</h1>
 
-                  <TodoForm onSubmit={addTodo} editingTodo={editingTodo} onUpdate={updateTodo} onCancel={cancelEditing} />
+                  <TodoForm onSubmit={(title: string, description: string) => addTodo.mutate({ id: Number(uuidv4()), title, description, done: false })} editingTodo={editingTodo} onUpdate={updateTodo.mutate} onCancel={cancelEditing} />
 
                   <div className="mt-8 space-y-4">
                      <AnimatePresence mode="popLayout">
-                        {todos.map((todo) => (
+                        {todos && todos.map((todo) => (
                            <motion.div
                               key={todo.id}
                               initial={{ opacity: 0, y: 10 }}
@@ -26,12 +27,12 @@ export default function TodoList() {
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.2 }}
                            >
-                              <TodoItem todo={todo} onToggle={toggleTodo} onEdit={startEditing} onDelete={deleteTodo} />
+                              <TodoItem todo={todo} onToggle={toggleTodo} onEdit={startEditing} onDelete={(id: number) => deleteTodo.mutate(id)} />
                            </motion.div>
                         ))}
                      </AnimatePresence>
 
-                     {todos.length === 0 && <EmptyState />}
+                     {todos && todos.length === 0 && <EmptyState />}
                   </div>
                </div>
             </div>
